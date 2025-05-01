@@ -10,4 +10,3 @@ services:
         value: backend.settings
       - key: SECRET_KEY
         value: django-insecure-f!o5v*oy7#n35$g-=9wg_zh^rrib=y8=7@(q%^=bj=@^545#xe
-        
