@@ -5,7 +5,7 @@ services:
     plan: free
     buildCommand: pip install -r backend/requirements.txt
     startCommand: gunicorn backend.wsgi:application
-    preDeployCommand: python manage.py migrate  # ← これを追加！
+    preDeployCommand: cd backend && python manage.py migrate  # ← こうすれば確実！
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: backend.settings
