@@ -17,14 +17,19 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse  # ← 追加
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
+def root_view(request):  # ← トップページのビュー関数
+    return HttpResponse("ようこそ！このアプリは Django REST API です。/api/ にアクセスしてください。")
+
 urlpatterns = [
+    path('', root_view),  # ← トップページ用ルートを追加
     path("admin/", admin.site.urls),
-    path('api/', include('api.urls')),  # ←これを追加！！
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # ←これ追加！
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), # ←これも追加！
+    path('api/', include('api.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
