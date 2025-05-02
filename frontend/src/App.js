@@ -3,6 +3,8 @@ import axios from 'axios';
 import Login from './Login';
 import SignUp from './SignUp';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 function App() {
   const [memos, setMemos] = useState([]);
   const [title, setTitle] = useState('');
@@ -18,7 +20,7 @@ function App() {
     const token = localStorage.getItem('accessToken');
     if (!token) return;
 
-    axios.get('http://localhost:8000/api/memos/', {
+    axios.get(`${API_BASE_URL}/memos/`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => setMemos(response.data))
@@ -29,14 +31,13 @@ function App() {
     const token = localStorage.getItem('accessToken');
     if (!token) return;
 
-    axios.get('http://localhost:8000/api/user/', {
+    axios.get(`${API_BASE_URL}/user/`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => setUsername(response.data.username))
     .catch(error => console.error('ユーザー名取得エラー:', error));
   };
 
-  // ✅ バリデーション付きメモ追加
   const addMemo = () => {
     if (!title.trim() || !content.trim()) {
       alert('タイトルと内容は必須です。');
@@ -49,7 +50,7 @@ function App() {
       return;
     }
 
-    axios.post('http://localhost:8000/api/memos/', { title, content }, {
+    axios.post(`${API_BASE_URL}/memos/`, { title, content }, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(() => {
@@ -69,14 +70,13 @@ function App() {
       return;
     }
 
-    axios.delete(`http://localhost:8000/api/memos/${id}/`, {
+    axios.delete(`${API_BASE_URL}/memos/${id}/`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(() => fetchMemos())
     .catch(error => console.error('削除エラー:', error));
   };
 
-  // ✅ バリデーション付きメモ更新
   const updateMemo = () => {
     if (!editingTitle.trim() || !editingContent.trim()) {
       alert('タイトルと内容は必須です。');
@@ -89,7 +89,7 @@ function App() {
       return;
     }
 
-    axios.put(`http://localhost:8000/api/memos/${editingId}/`, {
+    axios.put(`${API_BASE_URL}/memos/${editingId}/`, {
       title: editingTitle,
       content: editingContent
     }, {
@@ -213,3 +213,4 @@ function App() {
 }
 
 export default App;
+
