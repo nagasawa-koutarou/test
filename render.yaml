@@ -4,11 +4,10 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r backend/requirements.txt
-    startCommand: |
-      python backend/manage.py migrate &&
-      gunicorn backend.wsgi:application
+    startCommand: gunicorn backend.wsgi:application
+    preDeployCommand: python manage.py migrate  # ← これを追加！
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: backend.settings
       - key: SECRET_KEY
-        value: django-insecure-f!o5v*oy7#n35$g-=9wg_zh^rrib=y8=7@(q%^=bj=@^545#xe
+        value: あなたのSECRET_KEY
