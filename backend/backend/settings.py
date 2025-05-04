@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url  # ← 追加
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -37,8 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'rest_framework',  # ← Django REST Framework
-    'api',             # ← 自分で作ったアプリ
+    'rest_framework',  # Django REST Framework
+    'api',             # 自作アプリ
     'corsheaders',
 ]
 
@@ -73,14 +74,14 @@ TEMPLATES = [
 WSGI_APPLICATION = "backend.wsgi.application"
 
 
-# Database
+# Database（PostgreSQL に対応）
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600
+    )
 }
 
 
@@ -120,8 +121,12 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 
 # Django REST Framework 設定
 REST_FRAMEWORK = {
@@ -130,7 +135,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-# CORS設定
+# CORS 設定
 CORS_ALLOW_ALL_ORIGINS = True
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
