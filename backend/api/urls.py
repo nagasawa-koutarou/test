@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('signup/', signup),  
     path('user/', user_info),  
+    path('api/', include('api.urls')),
 ]
