@@ -1,5 +1,3 @@
-# backend/create_admin.py
-
 import os
 import sys
 import django
@@ -26,3 +24,4 @@ except OperationalError as e:
 except Exception as e:
     print("❌ Unexpected error:", str(e))
     sys.exit(1)
+
