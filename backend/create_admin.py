@@ -3,7 +3,6 @@
 import os
 import django
 
-# Django設定を明示的に読み込む
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
 django.setup()
 
@@ -18,5 +17,8 @@ try:
         print("✅ Superuser created.")
     else:
         print("ℹ️ Superuser already exists.")
-except OperationalError:
-    print("⚠️ Database not ready yet.")
+except OperationalError as e:
+    print("⚠️ Database not ready yet:", str(e))
+except Exception as e:
+    print("❌ Unexpected error:", str(e))
+
