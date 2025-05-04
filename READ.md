@@ -1,15 +1,13 @@
-ログイン・認証付きのメモ管理アプリです。Django REST + React の構成で、シンプルなUIながら機能も充実。
-
 # メモ管理アプリ（Django + React）
 
-ログイン機能付きのメモ管理アプリです。  
-React（フロントエンド） + Django REST Framework（バックエンド）で構築されています。
+ログイン・認証付きのメモ管理アプリです。  
+React（フロントエンド） + Django REST Framework（バックエンド）構成です。
 
 ---
 
 ## 🔧 主な機能
 
-- ユーザー登録・ログイン／ログアウト
+- ユーザー登録・ログイン／ログアウト（JWT認証）
 - メモの作成・一覧表示・編集・削除
 - 作成者と作成日時の表示
 - 入力バリデーション（React側 + Django側）
@@ -23,32 +21,15 @@ React（フロントエンド） + Django REST Framework（バックエンド）
 - Django REST Framework
 - React 18
 - Axios
-- JWT認証
-- SQLite（開発用DB）
+- JWT（JSON Web Token）認証
+- PostgreSQL（本番） / SQLite（開発用）
 
 ---
 
-## 🚀 ローカルでの起動方法
+## 🌐 本番環境
 
-### バックエンド（Django）
+- 🔙 バックエンド（Django API）:  
+  https://test-q8bi.onrender.com
 
-```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate          # Windowsの場合
-# または
-source venv/bin/activate       # Mac/Linuxの場合
-
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-```
-
-### フロントエンド（React）
-別ターミナルを開いて以下を実行：
-
-```bash
-cd frontend
-npm install
-npm start
-```
+- 🔜 フロントエンド（React SPA）:  
+  https://test-2-peqw.onrender.com
