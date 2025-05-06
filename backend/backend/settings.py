@@ -1,14 +1,16 @@
 from pathlib import Path
 import os
 import dj_database_url  # ← DATABASE_URL 対応
+import dotenv
+dotenv.load_dotenv()  # .env を読み込む
 
 # プロジェクトのベースディレクトリ
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # セキュリティキー（本番では環境変数で管理推奨）
-SECRET_KEY = "django-insecure-f!o5v*oy7#n35$g-=9wg_zh^rrib=y8=7@(q%^=bj=@^545#xe"
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-dev-key")
 
-# デバッグ（本番では False にすること）
+# デバッグ
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
