@@ -5,3 +5,4 @@ db.sqlite3
 frontend/node_modules/
 frontend/build/
 .env
+backend/create_admin.py
